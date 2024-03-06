@@ -90,6 +90,7 @@ public class Sketch extends PApplet {
 
     text(intHours, 20, 55);
     text(intMinutes, 50, 55);
+    text(":", 45, 55);
   }
 
   // define other methods down here.
