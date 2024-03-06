@@ -7,6 +7,7 @@ public class Sketch extends PApplet {
   int width;
   Random myRand = new Random();
   double randheight;
+  int timeOfDay;
 
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -15,8 +16,9 @@ public class Sketch extends PApplet {
 	// put your size call here
     length = 400;
     width = 400;
-    randheight = width * myRand.nextDouble(0.5);
+    randheight = width * myRand.nextDouble(0.5)/2;
     size(length, width);
+    timeOfDay = myRand.nextInt(24);
   }
 
   /** 
@@ -24,16 +26,18 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(17, 176, 250);
+    if (timeOfDay >= 8 && timeOfDay <= 21){
+      background(99, 195, 255);
+    }
+    else {
+      background(0, 7, 107);
+    }
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-
-    
-
 	// Field
     fill(0, 148, 7);
     ellipse((float)(length * 0.3125), (float)randheight + (float)(width * 1), (float)(length * 1), (float)(width * 0.625));
@@ -69,9 +73,24 @@ public class Sketch extends PApplet {
     ellipse((float)(length * 0.7875), (float)(width * 0.875), (float)(length * 0.0175), (float)(width * 0.0175));
 
   // Draw sun
+  if (timeOfDay >= 8 && timeOfDay <= 21){
     fill(255, 230, 0);
-    ellipse((float)(length * 0.125), (float)(width * 0.125), (float)(length * 0.1875), (float)(width * 0.1875));
   }
-  
+  else {
+    fill(255, 235, 179);
+  }
+    ellipse((float)(length * 0.125), (float)(width * 0.125), (float)(length * 0.1875), (float)(width * 0.1875));
+    
+  // Define text size, color, and show time
+    textSize(20);
+    fill(0, 0, 0);
+
+    int intHours = hour();
+    int intMinutes = minute();
+
+    text(intHours, 20, 55);
+    text(intMinutes, 50, 55);
+  }
+
   // define other methods down here.
 }
